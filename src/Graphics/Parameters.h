@@ -127,6 +127,7 @@ namespace graphics {
 	namespace blitMask {
 		extern BlitMaskParam COLOR_BUFFER;
 		extern BlitMaskParam DEPTH_BUFFER;
+		extern BlitMaskParam COLOR_AND_DEPTH_BUFFER;
 		extern BlitMaskParam STENCIL_BUFFER;
 	}
 }

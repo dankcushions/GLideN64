@@ -127,6 +127,7 @@ namespace graphics {
 	namespace blitMask {
 		BlitMaskParam COLOR_BUFFER(GL_COLOR_BUFFER_BIT);
 		BlitMaskParam DEPTH_BUFFER(GL_DEPTH_BUFFER_BIT);
+		BlitMaskParam COLOR_AND_DEPTH_BUFFER(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		BlitMaskParam STENCIL_BUFFER(GL_STENCIL_BUFFER_BIT);
 	}
 }

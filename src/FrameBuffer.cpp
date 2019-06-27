@@ -1454,6 +1454,7 @@ void FrameBufferList::renderBuffer()
 
 	m_overscan.activate();
 	gfxContext.clearColorBuffer(0.0f, 0.0f, 0.0f, 0.0f);
+	gfxContext.clearDepthBuffer();
 
 	GraphicsDrawer::BlitOrCopyRectParams blitParams;
 	blitParams.srcX0 = srcCoord[0];
@@ -1468,14 +1469,16 @@ void FrameBufferList::renderBuffer()
 	blitParams.dstY1 = dstCoord[3];
 	blitParams.dstWidth = m_overscan.getBufferWidth();
 	blitParams.dstHeight = m_overscan.getBufferHeight();
-	blitParams.filter = filter;
-	blitParams.mask = blitMask::COLOR_BUFFER;
+	blitParams.filter = textureParameters::FILTER_NEAREST;
+	blitParams.mask = blitMask::COLOR_AND_DEPTH_BUFFER;
 	blitParams.tex[0] = pBufferTexture;
 	blitParams.combiner = CombinerInfo::get().getTexrectCopyProgram();
 	blitParams.readBuffer = readBuffer;
+	blitParams.drawBuffer = ObjectHandle::defaultFramebuffer;
 	blitParams.invertY = config.frameBufferEmulation.enableOverscan == 0;
 
-	drawer.copyTexturedRect(blitParams);
+	//drawer.copyTexturedRect(blitParams);
+	drawer.blitOrCopyTexturedRect(blitParams);
 
 	if (pNextBuffer != nullptr) {
 		pNextBuffer->m_isMainBuffer = true;
