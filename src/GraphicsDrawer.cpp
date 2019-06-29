@@ -1698,10 +1698,10 @@ void GraphicsDrawer::blitOrCopyTexturedRect(const BlitOrCopyRectParams & _params
 	blitParams.mask = _params.mask;
 	blitParams.filter = _params.filter;
 	if (_params.invertX) {
-		std::swap(blitParams.srcX0, blitParams.srcX1);
+		std::swap(blitParams.dstX0, blitParams.dstX1);
 	}
 	if (_params.invertY) {
-		std::swap(blitParams.srcY0, blitParams.srcY1);
+		std::swap(blitParams.dstY0, blitParams.dstY1);
 	}
 
 	if (gfxContext.blitFramebuffers(blitParams))
