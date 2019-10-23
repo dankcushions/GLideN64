@@ -788,6 +788,10 @@ void FrameBufferList::saveBuffer(u32 _address, u16 _format, u16 _size, u16 _widt
 			m_pCurrent = nullptr;
 		} else {
 			m_pCurrent->m_resolved = false;
+#ifdef VC	
+			const GLenum discards[]  = {GL_DEPTH_ATTACHMENT};	
+			glDiscardFramebufferEXT(GL_FRAMEBUFFER, 1, discards);	
+#endif			
 			gfxContext.bindFramebuffer(bufferTarget::FRAMEBUFFER, m_pCurrent->m_FBO);
 			if (m_pCurrent->m_size != _size) {
 				f32 fillColor[4];
@@ -920,6 +924,12 @@ void FrameBufferList::attachDepthBuffer()
 	FrameBuffer * pCurrent = config.frameBufferEmulation.enable == 0 ? &m_list.back() : m_pCurrent;
 	if (pCurrent == nullptr)
 		return;
+
+#ifdef VC	
+	// TODO	
+	const GLenum discards[]  = {GL_DEPTH_ATTACHMENT};	
+	glDiscardFramebufferEXT(GL_FRAMEBUFFER, 1, discards);	
+#endif
 
 	DepthBuffer * pDepthBuffer = depthBufferList().getCurrent();
 
@@ -1570,6 +1580,11 @@ void FrameBufferList::renderBuffer()
 	wnd.swapBuffers();
 	if (m_pCurrent != nullptr) {
 		gfxContext.bindFramebuffer(bufferTarget::DRAW_FRAMEBUFFER, m_pCurrent->m_FBO);
+#ifdef VC	
+		// TODO	
+		const GLenum discards[]  = {GL_DEPTH_ATTACHMENT};	
+		glDiscardFramebufferEXT(GL_FRAMEBUFFER, 1, discards);	
+#endif
 	}
 	if (config.frameBufferEmulation.forceDepthBufferClear != 0) {
 		drawer.clearDepthBuffer();
