@@ -102,9 +102,9 @@ void GLInfo::init() {
 
 	bufferStorage = (!isGLESX && (numericVersion >= 44)) || Utils::isExtensionSupported(*this, "GL_ARB_buffer_storage") ||
 			Utils::isExtensionSupported(*this, "GL_EXT_buffer_storage");
-	LOG(LOG_WARNING, "bufferStorage=%s",bufferStorage);
-	LOG(LOG_WARNING, "GL_ARB_buffer_storage=%s",Utils::isExtensionSupported(*this, "GL_ARB_buffer_storage"));
-	LOG(LOG_WARNING, "GL_EXT_buffer_storage=%s",Utils::isExtensionSupported(*this, "GL_EXT_buffer_storage"));
+	LOG(LOG_WARNING, "bufferStorage=%d",bufferStorage);
+	//LOG_WARNING, "GL_ARB_buffer_storage=%s",Utils::isExtensionSupported(*this, "GL_ARB_buffer_storage"));
+	//LOG(LOG_WARNING, "GL_EXT_buffer_storage=%s",Utils::isExtensionSupported(*this, "GL_EXT_buffer_storage"));
 
 	texStorage = (isGLESX && (numericVersion >= 30)) || (!isGLESX && numericVersion >= 42) ||
 			Utils::isExtensionSupported(*this, "GL_ARB_texture_storage");
